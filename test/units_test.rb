@@ -37,6 +37,16 @@ describe 'FastUnits' do
     assert Unit("1.1 ml") > Unit("1 ml")
   end
 
+  it "can check compatibility" do
+    c = Unit("1 mg").compatible? Unit("2 mg")
+    assert_equal true, c
+  end
+
+  it "can check compatibility" do
+    c = Unit("1 mg").compatible? Unit("2 ml")
+    assert_equal false, c
+  end
+
   it "can subtract two units in mg" do
     total = Unit("1 mg") - Unit("1 mg")
     assert_equal 0, total.scalar

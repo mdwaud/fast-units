@@ -39,8 +39,19 @@ module FastUnits
     end
 
     def <=>(other)
-      compatible! other.units, self.units
+      compatible! other.units, @units
       return @scalar <=> other.scalar
+    end
+
+    def compatible?(other)
+      if other.class != FastUnits::Unit
+        raise TypeError, other.class + ' is not a Unit'
+      end
+      begin
+        compatible! other.units, @units
+      rescue
+        false
+      end
     end
 
     def compatible!(units1, units2)
