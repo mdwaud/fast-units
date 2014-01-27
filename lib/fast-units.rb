@@ -38,6 +38,11 @@ module FastUnits
       FastUnits::Unit.new(new_scalar.to_s + " " + new_units)
     end
 
+    def <=>(other)
+      compatible! other.units, self.units
+      return @scalar <=> other.scalar
+    end
+
     def compatible!(units1, units2)
       if units1 != units2
         raise TypeError, units1 + ' is not compatible with ' + units2

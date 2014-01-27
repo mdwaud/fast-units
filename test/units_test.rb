@@ -33,6 +33,10 @@ describe 'FastUnits' do
     assert_equal 'ml', total.units
   end
 
+  it "can compare two units" do
+    assert Unit("1.1 ml") > Unit("1 ml")
+  end
+
   it "can subtract two units in mg" do
     total = Unit("1 mg") - Unit("1 mg")
     assert_equal 0, total.scalar
