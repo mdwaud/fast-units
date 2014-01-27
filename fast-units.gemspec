@@ -6,10 +6,10 @@ require 'fast-units/version'
 Gem::Specification.new do |spec|
   spec.name          = "fast-units"
   spec.version       = FastUnits::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.authors       = ["Mike Waud"]
+  spec.email         = ["shortcodesolutions@gmail.com"]
+  spec.summary       = 'Subset of ruby-units designed for speed'
+  spec.description   = 'Subset of ruby-units designed for speed'
   spec.homepage      = ""
   spec.license       = "MIT"
 
