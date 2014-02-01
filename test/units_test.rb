@@ -1,6 +1,7 @@
 #require 'test_helper'
 require 'minitest/autorun'
 require 'fast-units'
+#require 'ruby-units'
 
 describe 'FastUnits' do
   it "can create a Unit in mg" do
@@ -47,6 +48,11 @@ describe 'FastUnits' do
     assert_equal false, c
   end
 
+  it "can check complicated compatibility" do
+    c = Unit("1 mg/ml").compatible? Unit("2 ml")
+    assert_equal false, c
+  end
+
   it "can subtract two units in mg" do
     total = Unit("1 mg") - Unit("1 mg")
     assert_equal 0, total.scalar
@@ -65,11 +71,29 @@ describe 'FastUnits' do
     assert_equal 'mg', total.units
   end
 
+  it "layered units are compatible " do
+    unit = Unit("10 mg") / Unit("1 ml") / Unit("1 ml")
+    c = unit.compatible? Unit('ml')
+    assert_equal false, c
+  end
+
+  it "can multiply on layered units" do
+    unit_1 = Unit("10 mg") / Unit("1 ml") / Unit("1 ml")
+    unit_2 = Unit('ml')
+    result = unit_1 * unit_2
+    assert_equal Unit('10 mg/ml'), result
+  end
+
+  it "can convert to a string" do
+    unit = Unit("10 mg/ml")
+    assert_equal "10 mg/ml", unit.to_s
+  end
+
   it "cannot add a mg to a ml" do
     #assert_raise TypeError do
     begin
       total = Unit("1 mg") + Unit("1 ml")
-    rescue TypeError
+    rescue ArgumentError
       assert true
     else
       assert false
